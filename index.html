@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tongue Twister BD</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <h1 id="appTitle">Tongue Twister BD</h1>
+    <p id="appSubtitle" class="subtitle">Bangla &amp; English tongue-twister practice.</p>
+    <button id="langToggle" class="lang-btn" type="button">Bangla</button>
+  </div>
+</header>
+
+<nav class="tabs wrap" role="tablist" aria-label="Sections">
+  <button id="tabBtn-library" class="tab active" data-tab="library" role="tab" type="button">Library</button>
+  <button id="tabBtn-practice" class="tab" data-tab="practice" role="tab" type="button">Practice</button>
+  <button id="tabBtn-challenge" class="tab" data-tab="challenge" role="tab" type="button">Challenge</button>
+  <button id="tabBtn-stats" class="tab" data-tab="stats" role="tab" type="button">My Progress</button>
+</nav>
+
+<main class="wrap">
+
+  <!-- ============ LIBRARY ============ -->
+  <section id="tab-library" class="panel">
+    <div class="filters">
+      <input id="searchBox" type="search" placeholder="Search twisters..." aria-label="Search twisters">
+      <label class="filter"><span id="lblLang">Language</span>
+        <select id="filterLang">
+          <option value="all">All</option>
+          <option value="bn">Bangla</option>
+          <option value="en">English</option>
+        </select>
+      </label>
+      <label class="filter"><span id="lblDiff">Difficulty</span>
+        <select id="filterDiff">
+          <option value="all">All</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </label>
+      <label class="check"><input id="favOnly" type="checkbox"> <span id="lblFavOnly">Favourites only</span></label>
+    </div>
+    <p id="libCount" class="count" aria-live="polite"></p>
+    <div id="cardGrid" class="grid"></div>
+    <p id="libEmpty" class="empty" hidden>No twisters match your filters.</p>
+  </section>
+
+  <!-- ============ PRACTICE ============ -->
+  <section id="tab-practice" class="panel" hidden>
+    <div class="practice-card">
+      <p id="practiceEmpty" class="empty">Pick a twister from the Library first, or tap Random below.</p>
+      <div id="practiceBody" hidden>
+        <p id="practiceText" class="big-text" lang="bn"></p>
+        <p id="practiceRom" class="rom"></p>
+        <p class="meta-line">
+          <span id="practiceCat" class="badge"></span>
+          <span id="practiceDiff" class="badge diff"></span>
+          <span id="practiceTarget" class="badge"></span>
+        </p>
+        <p id="practiceHint" class="hint"></p>
+        <p id="timer" class="timer" aria-live="off">0:00.0</p>
+        <p id="practiceResult" class="result" aria-live="polite"></p>
+        <div class="btn-row">
+          <button id="startBtn" class="btn primary" type="button">Start</button>
+          <button id="doneBtn" class="btn good" type="button" disabled>Done - I said it!</button>
+          <button id="againBtn" class="btn" type="button" disabled>Again</button>
+        </div>
+      </div>
+      <button id="randomBtn" class="btn wide" type="button">Random twister</button>
+    </div>
+  </section>
+
+  <!-- ============ CHALLENGE ============ -->
+  <section id="tab-challenge" class="panel" hidden>
+    <div class="practice-card">
+      <h2 id="challengeTitle">Today's Challenge</h2>
+      <p id="challengeHint" class="hint"></p>
+      <p id="challengeText" class="big-text" lang="bn"></p>
+      <p id="challengeRom" class="rom"></p>
+      <p class="meta-line">
+        <span id="challengeCat" class="badge"></span>
+        <span id="challengeDiff" class="badge diff"></span>
+        <span id="challengeTarget" class="badge"></span>
+      </p>
+      <p id="challengeTimer" class="timer" aria-live="off">0:00.0</p>
+      <p id="challengeResult" class="result" aria-live="polite"></p>
+      <p id="challengeDone" class="done-note" hidden></p>
+      <div class="btn-row">
+        <button id="chStartBtn" class="btn primary" type="button">Start</button>
+        <button id="chDoneBtn" class="btn good" type="button" disabled>Done - I said it!</button>
+      </div>
+      <p class="streak-line"><span id="lblStreak">Day streak</span>: <strong id="streakVal">0</strong></p>
+    </div>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <section id="tab-stats" class="panel" hidden>
+    <div class="stat-grid">
+      <div class="stat"><span id="statPractised" class="stat-num">0</span><span id="lblStatPractised" class="stat-lbl">Twisters practised</span></div>
+      <div class="stat"><span id="statAttempts" class="stat-num">0</span><span id="lblStatAttempts" class="stat-lbl">Total attempts</span></div>
+      <div class="stat"><span id="statStreak" class="stat-num">0</span><span id="lblStatStreak" class="stat-lbl">Current streak</span></div>
+      <div class="stat"><span id="statBestStreak" class="stat-num">0</span><span id="lblStatBestStreak" class="stat-lbl">Best streak</span></div>
+      <div class="stat"><span id="statFavs" class="stat-num">0</span><span id="lblStatFavs" class="stat-lbl">Favourites</span></div>
+      <div class="stat"><span id="statDays" class="stat-num">0</span><span id="lblStatDays" class="stat-lbl">Days practised</span></div>
+    </div>
+    <h2 id="bestTimesTitle">Your best times</h2>
+    <p id="noAttempts" class="empty" hidden>No attempts yet - go practise a twister!</p>
+    <ul id="bestTimesList" class="best-list"></ul>
+
+    <h2 id="dataTitle">Your data</h2>
+    <div class="btn-row">
+      <button id="exportBtn" class="btn" type="button">Export data</button>
+      <button id="importBtn" class="btn" type="button">Import data</button>
+      <button id="eraseBtn" class="btn danger" type="button">Erase all data</button>
+    </div>
+    <input id="importFile" type="file" accept="application/json,.json" hidden>
+    <p id="dataMsg" class="result" aria-live="polite"></p>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <p id="disclaimer" class="fine"></p>
+  <p id="madeIn" class="fine"></p>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/logic.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
